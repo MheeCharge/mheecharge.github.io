@@ -3,611 +3,588 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MheeCharge — โซลาร์เซลล์ติดบ้าน ประหยัดค่าไฟ คุ้มทุกเดือน</title>
-  <meta name="description" content="MheeCharge ติดตั้งโซลาร์เซลล์ที่บ้าน สำนักงาน และโรงงาน ประหยัดค่าไฟทุกเดือน ผ่อนได้ คำนวณแพ็กเกจที่เหมาะกับคุณใน 30 วินาที" />
-  <meta name="keywords" content="โซลาร์เซลล์, solar cell, ประหยัดค่าไฟ, ติดตั้งโซลาร์, MheeCharge, หมีชาร์จ, พลังงานแสงอาทิตย์" />
-  <meta property="og:title" content="MheeCharge — โซลาร์เซลล์ติดบ้าน ประหยัดค่าไฟ" />
-  <meta property="og:description" content="ค่าไฟลดทุกเดือน ผ่อนสบาย กำไรตั้งแต่เดือนแรก" />
+  <title>MheeCharge — คำนวณค่าไฟ หาผู้ติดตั้งที่ใช่</title>
+  <meta name="description" content="MheeCharge คำนวณแพ็กเกจโซลาร์เซลล์ที่เหมาะกับคุณ และจับคู่คุณกับผู้ติดตั้งคุณภาพ" />
+  <meta name="keywords" content="โซลาร์เซลล์, solar cell, ประหยัดค่าไฟ, ติดตั้งโซลาร์, MheeCharge, หมีชาร์จ, ผู้ติดตั้งโซลาร์" />
+  <meta property="og:title" content="MheeCharge — คำนวณค่าไฟ หาผู้ติดตั้งที่ใช่" />
+  <meta property="og:description" content="โซลาร์เซลล์ที่ออกแบบมาให้คุ้ม" />
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #fafaf7;
+      --bg: #fdf6e7;
+      --bg-2: #fbeecf;
       --surface: #ffffff;
-      --ink: #1a1a1a;
-      --ink-soft: #5a5a5a;
-      --ink-mute: #9a9a9a;
-      --line: #ececec;
+      --ink: #000000;
+      --ink-soft: #4a4a4a;
+      --ink-mute: #7a7a75;
+      --line: #e8e1d1;
+      --chip: #f5ecd6;
+      --chip-hover: #fbbf24;
+
       --brand: #f59e0b;
       --brand-2: #ea580c;
-      --brand-soft: #fef3c7;
-      --ok: #059669;
-      --ok-soft: #d1fae5;
-      --radius: 16px;
-      --shadow: 0 2px 8px rgba(0,0,0,0.04);
-      --shadow-lg: 0 12px 32px rgba(0,0,0,0.08);
+      --brand-dark: #92400e;
+      --brand-soft: #fff3d6;
+
+      --ok-50: #d1fae5;
+      --ok-600: #059669;
+      --ok-800: #065f46;
+      --ok-900: #064e3b;
+
+      --shadow-lg: 0 20px 48px rgba(138, 100, 20, 0.12);
+      --shadow-md: 0 8px 24px rgba(138, 100, 20, 0.08);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: 'Prompt', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
+      font-family: 'Kanit', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+      background-attachment: fixed;
       color: var(--ink);
-      line-height: 1.6;
+      min-height: 100vh;
+      line-height: 1.5;
+      font-weight: 300;
       -webkit-font-smoothing: antialiased;
+      padding: 32px 16px 48px;
     }
-    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    .page { max-width: 620px; margin: 0 auto; }
 
-    /* Nav */
-    nav {
-      position: sticky; top: 0; z-index: 50;
-      background: rgba(250,250,247,0.85);
-      backdrop-filter: saturate(180%) blur(12px);
-      border-bottom: 1px solid var(--line);
+    .header {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 28px; justify-content: center;
     }
-    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-    .logo { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 18px; color: var(--ink); text-decoration: none; }
     .logo-mark {
-      width: 34px; height: 34px; border-radius: 50%;
+      width: 38px; height: 38px; border-radius: 50%;
       background: linear-gradient(135deg, var(--brand), var(--brand-2));
       display: flex; align-items: center; justify-content: center;
-      color: #fff; font-size: 18px;
-      box-shadow: 0 4px 12px rgba(245,158,11,0.3);
+      font-size: 18px;
+      box-shadow: 0 4px 12px rgba(245,158,11,0.35);
     }
-    .nav-links { display: flex; gap: 28px; align-items: center; }
-    .nav-links a { color: var(--ink-soft); text-decoration: none; font-size: 14px; font-weight: 400; transition: color .2s; }
-    .nav-links a:hover { color: var(--ink); }
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 12px 22px; border-radius: 999px; font-weight: 500; font-size: 15px;
-      text-decoration: none; border: none; cursor: pointer;
-      font-family: inherit; transition: all .2s; white-space: nowrap;
+    .logo-text {
+      font-weight: 700; font-size: 22px;
+      color: var(--brand-dark); letter-spacing: -0.01em;
     }
-    .btn-primary { background: var(--ink); color: #fff; }
-    .btn-primary:hover { background: #000; transform: translateY(-1px); }
-    .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
-    .btn-ghost:hover { border-color: var(--ink); }
-    .btn-brand { background: linear-gradient(135deg, var(--brand), var(--brand-2)); color: #fff; box-shadow: 0 4px 16px rgba(245,158,11,0.35); }
-    .btn-brand:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(245,158,11,0.45); }
 
-    /* Hero */
-    .hero { padding: 80px 0 60px; text-align: center; }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 6px 14px; border-radius: 999px;
-      background: var(--brand-soft); color: var(--brand-2);
-      font-size: 13px; font-weight: 500; margin-bottom: 24px;
-    }
-    .hero h1 {
-      font-size: clamp(36px, 6vw, 60px); font-weight: 600; letter-spacing: -0.02em;
-      line-height: 1.1; margin-bottom: 20px; color: var(--ink);
-    }
-    .hero h1 .highlight {
-      background: linear-gradient(135deg, var(--brand), var(--brand-2));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    .hero p { font-size: 18px; color: var(--ink-soft); max-width: 620px; margin: 0 auto 36px; }
-    .hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-
-    /* Features */
-    .features { padding: 60px 0; }
-    .section-head { text-align: center; margin-bottom: 48px; }
-    .section-head h2 { font-size: clamp(28px, 4vw, 38px); font-weight: 600; letter-spacing: -0.01em; margin-bottom: 12px; }
-    .section-head p { color: var(--ink-soft); font-size: 16px; }
-    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-    .feature {
-      background: var(--surface); padding: 32px; border-radius: var(--radius);
-      border: 1px solid var(--line); transition: all .2s;
-    }
-    .feature:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
-    .feature-icon {
-      width: 44px; height: 44px; border-radius: 12px;
-      background: var(--brand-soft); color: var(--brand-2);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 22px; margin-bottom: 16px;
-    }
-    .feature h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
-    .feature p { color: var(--ink-soft); font-size: 15px; }
-
-    /* Calculator / Journey */
-    .calc-section { padding: 60px 0 80px; }
-    .calc-card {
-      max-width: 680px; margin: 0 auto;
-      background: var(--surface); border-radius: 24px;
-      padding: 40px; border: 1px solid var(--line);
+    .card {
+      background: var(--surface);
+      border-radius: 24px;
+      padding: 32px;
+      border: 1px solid var(--line);
       box-shadow: var(--shadow-lg);
     }
-    .progress { display: flex; gap: 8px; justify-content: center; margin-bottom: 32px; }
-    .progress-dot { width: 32px; height: 4px; border-radius: 2px; background: var(--line); transition: background .3s; }
-    .progress-dot.active { background: var(--brand); }
-    .progress-dot.done { background: var(--ink); }
+    .card-title { font-size: 26px; font-weight: 700; color: #000; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .card-sub { font-size: 14px; color: var(--ink-soft); margin-bottom: 28px; font-weight: 300; }
 
-    .step { display: none; animation: fadeIn .4s ease; }
-    .step.active { display: block; }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
+    .q { padding-bottom: 22px; margin-bottom: 22px; border-bottom: 1px dashed var(--line); }
+    .q:last-of-type { border-bottom: none; padding-bottom: 8px; margin-bottom: 0; }
+
+    .q-num {
+      display: inline-block;
+      width: 24px; height: 24px; border-radius: 50%;
+      background: var(--brand-soft); color: var(--brand-dark);
+      font-size: 13px; font-weight: 600; text-align: center; line-height: 22px;
+      border: 1.5px solid var(--brand);
+      margin-right: 10px; vertical-align: middle;
     }
-    .q-label { font-size: 14px; color: var(--ink-mute); margin-bottom: 8px; font-weight: 400; }
-    .q-title { font-size: clamp(22px, 3vw, 28px); font-weight: 600; line-height: 1.3; margin-bottom: 8px; }
-    .q-sub { color: var(--ink-soft); font-size: 15px; margin-bottom: 32px; }
+    .q-title { font-size: 17px; font-weight: 700; color: #000; margin-bottom: 14px; display: flex; align-items: center; }
 
-    /* Slider */
-    .slider-wrap { margin: 40px 0; }
     .slider-value {
-      text-align: center; font-size: 44px; font-weight: 600;
-      background: linear-gradient(135deg, var(--brand), var(--brand-2));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      margin-bottom: 24px; letter-spacing: -0.02em;
+      text-align: center; font-size: 38px; font-weight: 600;
+      color: var(--brand-dark); margin: 8px 0 6px; letter-spacing: -0.02em;
+      display: flex; align-items: baseline; justify-content: center; gap: 6px;
     }
-    .slider-value .unit { font-size: 16px; color: var(--ink-mute); font-weight: 400; -webkit-text-fill-color: var(--ink-mute); margin-left: 6px; }
-    input[type="range"] {
-      -webkit-appearance: none; width: 100%; height: 6px;
-      background: var(--line); border-radius: 999px; outline: none;
+    .slider-value .unit { font-size: 14px; color: var(--ink-mute); font-weight: 300; }
+    .slider-hint {
+      text-align: center; margin-bottom: 14px;
+      font-size: 13px; color: var(--ok-800); font-weight: 500;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      min-height: 22px;
     }
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none; width: 24px; height: 24px;
-      border-radius: 50%; background: #fff; cursor: pointer;
-      border: 3px solid var(--brand); box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-      transition: transform .15s;
+    .slider-hint .rec {
+      font-size: 11px; font-weight: 500; padding: 2px 10px; border-radius: 999px;
+      background: var(--ok-50); color: var(--ok-800); transition: opacity .2s;
     }
-    input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
-    input[type="range"]::-moz-range-thumb {
-      width: 24px; height: 24px; border-radius: 50%; background: #fff; cursor: pointer;
-      border: 3px solid var(--brand); box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    }
-    .slider-labels { display: flex; justify-content: space-between; margin-top: 12px; font-size: 13px; color: var(--ink-mute); }
+    input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; background: var(--chip); border-radius: 999px; outline: none; }
+    input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 26px; height: 26px; border-radius: 50%; background: var(--brand); cursor: pointer; border: 4px solid #fff; box-shadow: 0 2px 8px rgba(245,158,11,0.45); transition: transform .15s; }
+    input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.1); }
+    input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--brand); cursor: pointer; border: 4px solid #fff; box-shadow: 0 2px 8px rgba(245,158,11,0.45); }
+    .slider-labels { display: flex; justify-content: space-between; margin-top: 10px; font-size: 12px; color: var(--ink-mute); font-weight: 300; }
 
     /* Option cards */
-    .options { display: grid; gap: 12px; margin: 24px 0; }
-    .opt-card {
-      background: var(--surface); border: 2px solid var(--line);
-      border-radius: var(--radius); padding: 20px 22px; cursor: pointer;
-      display: flex; align-items: center; justify-content: space-between; gap: 16px;
-      transition: all .2s; text-align: left;
+    .options { display: grid; gap: 10px; }
+    .opt {
+      background: var(--chip); border: 2px solid transparent;
+      border-radius: 14px; padding: 14px 16px; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      transition: all .18s; text-align: left; font-family: inherit; color: var(--ink);
     }
-    .opt-card:hover { border-color: var(--ink-mute); }
-    .opt-card.selected { border-color: var(--brand); background: #fffbeb; }
-    .opt-left { flex: 1; }
-    .opt-title { font-weight: 600; font-size: 17px; margin-bottom: 4px; }
-    .opt-desc { color: var(--ink-soft); font-size: 14px; }
-    .opt-badge {
-      font-size: 11px; font-weight: 500; padding: 3px 10px;
-      background: var(--ok-soft); color: var(--ok); border-radius: 999px;
-      margin-left: 8px;
+    .opt:hover:not(.disabled) { background: var(--chip-hover); border-color: var(--brand-dark); }
+    .opt:hover:not(.disabled) .opt-desc { color: var(--brand-dark); }
+    .opt.selected { background: var(--brand-soft); border-color: var(--brand); box-shadow: 0 4px 14px rgba(245,158,11,0.2); }
+    .opt.selected:hover:not(.disabled) { background: var(--chip-hover); }
+    .opt.disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      background: #f3ede0;
     }
+    .opt-body { flex: 1; }
+    .opt-title { font-weight: 500; font-size: 15px; margin-bottom: 2px; color: var(--ink); display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+    .opt.selected .opt-title { color: var(--brand-dark); font-weight: 600; }
+    .opt-desc { font-size: 12.5px; color: var(--ink-soft); font-weight: 300; }
+    .opt.selected .opt-desc { color: var(--brand-dark); opacity: 0.85; }
+    .opt-badge { font-size: 10.5px; font-weight: 500; padding: 2px 8px; background: var(--ok-50); color: var(--ok-800); border-radius: 999px; letter-spacing: 0.02em; }
+    .opt-badge.soon { background: #f1e9d2; color: #8a6d1a; border: 1px solid #d9c98a; }
     .opt-check {
-      width: 24px; height: 24px; border-radius: 50%;
-      border: 2px solid var(--line); flex-shrink: 0;
+      width: 22px; height: 22px; border-radius: 50%;
+      border: 2px solid rgba(0,0,0,0.12); flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
-      color: #fff; transition: all .2s;
+      font-size: 12px; color: transparent;
+      background: rgba(255,255,255,0.55); transition: all .2s;
     }
-    .opt-card.selected .opt-check { background: var(--brand); border-color: var(--brand); }
+    .opt.selected .opt-check { background: var(--brand); border-color: var(--brand); color: var(--brand-dark); }
 
-    .step-actions { display: flex; gap: 12px; margin-top: 32px; }
-    .step-actions .btn { flex: 1; }
+    /* Result */
+    .result { margin-top: 26px; background: #fffdf6; border: 1px solid var(--line); border-radius: 20px; padding: 24px; }
+    .result-head { text-align: center; padding-bottom: 18px; border-bottom: 1px solid var(--line); margin-bottom: 18px; }
+    .result-eyebrow { font-size: 11.5px; color: var(--ink-mute); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; font-weight: 400; }
+    .result-title { font-size: 22px; font-weight: 600; color: var(--brand-dark); margin-bottom: 4px; letter-spacing: -0.01em; }
+    .result-size { font-size: 13px; color: var(--ink-soft); font-weight: 300; }
+    .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px; }
+    .r-item { background: var(--bg); padding: 14px 16px; border-radius: 12px; }
+    .r-item .label { font-size: 12px; color: var(--ink-mute); margin-bottom: 3px; font-weight: 300; }
+    .r-item .value { font-size: 18px; font-weight: 600; color: #000; letter-spacing: -0.01em; }
 
-    /* Results */
-    .result-hero {
-      text-align: center; padding: 20px 0 32px;
-      border-bottom: 1px solid var(--line); margin-bottom: 28px;
+    .profit { background: var(--ok-50); color: var(--ok-900); padding: 24px; border-radius: 16px; text-align: center; border: 2px solid var(--ok-600); box-shadow: 0 8px 20px rgba(4,120,87,0.12); }
+    .profit .label { font-size: 13px; margin-bottom: 4px; font-weight: 400; opacity: 0.85; }
+    .profit .value { font-size: 36px; font-weight: 700; margin-bottom: 4px; letter-spacing: -0.02em; line-height: 1.1; }
+    .profit .sub { font-size: 12.5px; font-weight: 300; opacity: 0.85; }
+    .note { margin-top: 14px; font-size: 12px; color: var(--ink-mute); text-align: center; line-height: 1.6; font-weight: 300; }
+
+    /* CTA */
+    .cta-wrap { margin-top: 22px; text-align: center; }
+    .cta {
+      width: 100%;
+      padding: 18px 24px;
+      border-radius: 16px;
+      border: none;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      color: #fff;
+      font-family: inherit;
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      box-shadow: 0 10px 28px rgba(234,88,12,0.35);
+      transition: transform .15s, box-shadow .2s;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
     }
-    .result-eyebrow { color: var(--ink-mute); font-size: 14px; margin-bottom: 8px; }
-    .result-title { font-size: 28px; font-weight: 600; margin-bottom: 8px; }
-    .result-size { font-size: 16px; color: var(--ink-soft); }
+    .cta:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(234,88,12,0.45); }
+    .cta:active { transform: translateY(0); }
+    .cta .ico { font-size: 20px; }
+    .cta-hint { font-size: 12px; color: var(--ink-mute); margin-top: 10px; font-weight: 300; }
 
-    .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 24px; }
-    .result-item { background: #fafaf7; padding: 18px; border-radius: 12px; }
-    .result-item .label { font-size: 13px; color: var(--ink-mute); margin-bottom: 4px; }
-    .result-item .value { font-size: 20px; font-weight: 600; }
+    /* Installer section */
+    .installers { margin-top: 28px; }
+    .installers-head { text-align: center; margin-bottom: 18px; }
+    .installers-head h2 { font-size: 20px; font-weight: 700; color: #000; margin-bottom: 4px; letter-spacing: -0.01em; }
+    .installers-head p { font-size: 13px; color: var(--ink-soft); font-weight: 300; }
 
-    .profit-card {
-      background: linear-gradient(135deg, #059669, #10b981);
-      color: #fff; padding: 24px; border-radius: var(--radius);
-      text-align: center; margin-bottom: 24px;
+    .installer {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow-md);
+      transition: transform .15s, box-shadow .2s;
     }
-    .profit-card .label { font-size: 13px; opacity: 0.9; margin-bottom: 6px; }
-    .profit-card .value { font-size: 34px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.02em; }
-    .profit-card .sub { font-size: 14px; opacity: 0.95; }
+    .installer:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+    .installer.featured { border-color: var(--brand); border-width: 2px; }
 
-    .result-note {
-      font-size: 13px; color: var(--ink-mute); text-align: center;
-      padding: 16px; background: var(--bg); border-radius: 12px; margin-bottom: 20px;
+    .inst-top {
+      display: flex; justify-content: space-between; gap: 14px;
+      align-items: flex-start; margin-bottom: 12px;
     }
-
-    /* Contact */
-    .contact { padding: 80px 0; background: var(--surface); border-top: 1px solid var(--line); }
-    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-top: 40px; }
-    .contact-item { text-align: center; }
-    .contact-item .icon {
-      width: 52px; height: 52px; margin: 0 auto 14px;
-      border-radius: 50%; background: var(--brand-soft);
-      color: var(--brand-2); display: flex; align-items: center; justify-content: center;
-      font-size: 22px;
+    .inst-name-row {
+      display: flex; align-items: center; flex-wrap: wrap; gap: 8px;
+      margin-bottom: 4px;
     }
-    .contact-item h4 { font-size: 15px; font-weight: 500; color: var(--ink-mute); margin-bottom: 4px; }
-    .contact-item p { font-size: 16px; font-weight: 500; color: var(--ink); }
+    .inst-name { font-size: 17px; font-weight: 600; color: #000; letter-spacing: -0.01em; }
+    .inst-badge {
+      font-size: 10.5px; font-weight: 500;
+      padding: 3px 9px; border-radius: 999px;
+      letter-spacing: 0.02em;
+    }
+    .inst-badge.premium { background: #fef3c7; color: #92400e; border: 1px solid #f59e0b; }
+    .inst-badge.popular { background: #d1fae5; color: #065f46; border: 1px solid #059669; }
+    .inst-badge.value { background: #dbeafe; color: #1e40af; border: 1px solid #3b82f6; }
+    .inst-badge.local { background: #ede9fe; color: #5b21b6; border: 1px solid #8b5cf6; }
+    .inst-badge.fast { background: #fee2e2; color: #991b1b; border: 1px solid #ef4444; }
+    .inst-rating { font-size: 13px; color: var(--ink-soft); font-weight: 400; }
+    .inst-rating .stars { color: #f59e0b; font-weight: 600; }
+    .inst-rating .reviews { color: var(--ink-mute); font-size: 12px; font-weight: 300; }
 
-    /* Footer */
-    footer { padding: 40px 0; border-top: 1px solid var(--line); }
-    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-    .footer-inner p { color: var(--ink-mute); font-size: 14px; }
+    .inst-price { text-align: right; flex-shrink: 0; }
+    .inst-price .label { font-size: 11px; color: var(--ink-mute); font-weight: 300; margin-bottom: 2px; }
+    .inst-price .value { font-size: 20px; font-weight: 700; color: var(--brand-dark); letter-spacing: -0.01em; line-height: 1.1; }
+    .inst-price .unit { font-size: 11px; color: var(--ink-mute); font-weight: 300; display: block; }
 
-    @media (max-width: 640px) {
-      .nav-links a:not(.btn) { display: none; }
-      .hero { padding: 48px 0 32px; }
-      .calc-card { padding: 28px 20px; border-radius: 20px; }
+    .inst-specs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 14px;
+      padding: 12px 14px;
+      background: var(--bg);
+      border-radius: 10px;
+      margin-bottom: 12px;
+      font-size: 12.5px;
+      color: var(--ink-soft);
+      font-weight: 400;
+    }
+    .inst-specs .spec-label {
+      color: var(--ink-mute);
+      font-size: 11px;
+      font-weight: 300;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .inst-specs .spec-value { color: var(--ink); font-weight: 500; }
+
+    .inst-highlight {
+      font-size: 12.5px;
+      color: var(--ok-800);
+      font-weight: 400;
+      background: var(--ok-50);
+      padding: 8px 12px;
+      border-radius: 8px;
+      margin-bottom: 14px;
+    }
+    .inst-highlight::before { content: "✓ "; font-weight: 700; }
+
+    .quote-btn {
+      width: 100%;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 2px solid var(--brand);
+      background: #fff;
+      color: var(--brand-dark);
+      font-family: inherit;
+      font-size: 14.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .18s;
+    }
+    .quote-btn:hover { background: var(--chip-hover); border-color: var(--brand-dark); }
+    .quote-btn.sent {
+      background: var(--ok-50);
+      border-color: var(--ok-600);
+      color: var(--ok-800);
+      cursor: default;
+    }
+    .quote-btn.sent:hover { background: var(--ok-50); border-color: var(--ok-600); }
+
+    @media (max-width: 500px) {
+      body { padding: 20px 12px; }
+      .card { padding: 22px 18px; border-radius: 20px; }
       .result-grid { grid-template-columns: 1fr; }
-      .footer-inner { flex-direction: column; text-align: center; }
+      .card-title { font-size: 22px; }
+      .slider-value { font-size: 32px; }
+      .profit .value { font-size: 30px; }
+      .inst-top { flex-direction: column; gap: 10px; }
+      .inst-price { text-align: left; }
+      .cta { font-size: 15px; padding: 16px 20px; }
     }
   </style>
 </head>
 <body>
-  <nav>
-    <div class="wrap nav-inner">
-      <a href="#" class="logo">
-        <span class="logo-mark">⚡</span>
-        <span>MheeCharge</span>
-      </a>
-      <div class="nav-links">
-        <a href="#features">จุดเด่น</a>
-        <a href="#calculator">คำนวณค่าไฟ</a>
-        <a href="#contact">ติดต่อ</a>
-        <a href="#calculator" class="btn btn-primary">เริ่มต้น</a>
-      </div>
+  <div class="page">
+    <div class="header">
+      <div class="logo-mark">⚡</div>
+      <div class="logo-text">MheeCharge</div>
     </div>
-  </nav>
 
-  <header class="hero">
-    <div class="wrap">
-      <div class="hero-badge">🐻 โซลาร์เซลล์ ที่ออกแบบมาให้คุ้ม</div>
-      <h1>ค่าไฟลดทุกเดือน<br><span class="highlight">กำไรตั้งแต่เดือนแรก</span></h1>
-      <p>เราเชื่อว่าพลังงานสะอาด ควรจ่ายได้ทุกบ้าน — ผ่อนเบากว่าค่าไฟที่ประหยัดได้ เริ่มกำไรได้ตั้งแต่วันติดตั้ง</p>
-      <div class="hero-cta">
-        <a href="#calculator" class="btn btn-brand">คำนวณแพ็กเกจของคุณ →</a>
-        <a href="#features" class="btn btn-ghost">ดูว่าทำไมต้อง MheeCharge</a>
-      </div>
-    </div>
-  </header>
+    <div class="card">
+      <h1 class="card-title">คำนวณค่าไฟของคุณ</h1>
+      <p class="card-sub">ตอบ 3 ข้อ ระบบจะบอกว่าติดโซลาร์แล้วคุ้มแค่ไหน</p>
 
-  <section id="features" class="features">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>ทำไมต้อง MheeCharge</h2>
-        <p>เรียบง่าย โปร่งใส และคุ้มจริงทุกเดือน</p>
-      </div>
-      <div class="features-grid">
-        <div class="feature">
-          <div class="feature-icon">💰</div>
-          <h3>ประหยัดจริง มากกว่าค่าผ่อน</h3>
-          <p>ค่าไฟที่ลดได้ต่อเดือน มักสูงกว่าค่าผ่อน — หมายความว่าคุณเริ่มกำไรได้ตั้งแต่เดือนแรก</p>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">🏠</div>
-          <h3>บ้าน สำนักงาน โรงงาน</h3>
-          <p>ติดตั้งได้ตั้งแต่บ้านเล็ก ไปจนถึงโรงงานขนาดใหญ่ ออกแบบแพ็กเกจให้เหมาะกับคุณโดยเฉพาะ</p>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">🤝</div>
-          <h3>ผ่อนได้ ไม่ต้องจ่ายเต็ม</h3>
-          <p>มีแผนผ่อน 8 ปี ดาวน์แค่ 10% — ให้ระบบทำงานเก็บเงินคืนให้คุณทุกวัน</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="calculator" class="calc-section">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>แพ็กเกจของคุณ</h2>
-        <p>ตอบแค่ 3 ข้อ เราจะบอกคุณว่าประหยัดได้เท่าไหร่</p>
+      <!-- Q1 -->
+      <div class="q">
+        <div class="q-title"><span class="q-num">1</span>ค่าไฟเดือนละประมาณเท่าไหร่?</div>
+        <div class="slider-value"><span id="billNum">500</span><span class="unit">บาท/เดือน</span></div>
+        <div class="slider-hint">&nbsp;</div>
+        <input type="range" id="billSlider" min="500" max="20000" step="500" value="500" />
+        <div class="slider-labels"><span>500</span><span>20,000+</span></div>
       </div>
 
-      <div class="calc-card">
-        <div class="progress" id="progress">
-          <div class="progress-dot active"></div>
-          <div class="progress-dot"></div>
-          <div class="progress-dot"></div>
+      <!-- Q2 -->
+      <div class="q">
+        <div class="q-title"><span class="q-num">2</span>อยากประหยัดกี่ %?</div>
+        <div class="slider-value"><span id="savNum">70</span><span class="unit">%</span></div>
+        <div class="slider-hint">
+          <span id="savBaht">ประหยัดประมาณ 350 บ./เดือน</span>
+          <span class="rec" id="savRec">แนะนำ</span>
         </div>
+        <input type="range" id="savSlider" min="30" max="100" step="5" value="70" />
+        <div class="slider-labels"><span>30%</span><span>100%</span></div>
+      </div>
 
-        <!-- STEP 1: Bill -->
-        <div class="step active" data-step="1">
-          <div class="q-label">ข้อ 1 จาก 3</div>
-          <div class="q-title">ค่าไฟเดือนละประมาณเท่าไหร่?</div>
-          <div class="q-sub">ลากเพื่อปรับตัวเลขให้ใกล้เคียงค่าไฟที่คุณจ่ายจริง</div>
-
-          <div class="slider-wrap">
-            <div class="slider-value" id="billDisplay">3,000<span class="unit">บาท/เดือน</span></div>
-            <input type="range" id="billSlider" min="1000" max="20000" step="500" value="3000" />
-            <div class="slider-labels">
-              <span>1,000</span>
-              <span>20,000+</span>
+      <!-- Q3 -->
+      <div class="q">
+        <div class="q-title"><span class="q-num">3</span>จ่ายเต็ม หรือผ่อน?</div>
+        <div class="options" id="payOpts">
+          <button type="button" class="opt selected" data-val="full">
+            <div class="opt-body">
+              <div class="opt-title">จ่ายเต็มก้อนเดียว <span class="opt-badge">แนะนำ</span></div>
+              <div class="opt-desc">ไม่มีดอกเบี้ย ประหยัด 100% ตั้งแต่เดือนแรก</div>
             </div>
-          </div>
-
-          <div class="step-actions">
-            <button class="btn btn-brand" onclick="nextStep()">ถัดไป →</button>
-          </div>
-        </div>
-
-        <!-- STEP 2: Savings goal -->
-        <div class="step" data-step="2">
-          <div class="q-label">ข้อ 2 จาก 3</div>
-          <div class="q-title">อยากประหยัดค่าไฟสักกี่เปอร์เซ็นต์?</div>
-          <div class="q-sub">ยิ่งประหยัดเยอะ ระบบก็ยิ่งใหญ่ขึ้น — เลือกที่คุณสบายใจ</div>
-
-          <div class="options" id="savingsOptions">
-            <button class="opt-card" data-val="0.5">
-              <div class="opt-left">
-                <div class="opt-title">ประหยัด 50%</div>
-                <div class="opt-desc">เริ่มต้นพอดี ๆ ลดค่าไฟครึ่งนึง</div>
-              </div>
-              <div class="opt-check">✓</div>
-            </button>
-            <button class="opt-card selected" data-val="0.7">
-              <div class="opt-left">
-                <div class="opt-title">ประหยัด 70% <span class="opt-badge">แนะนำ</span></div>
-                <div class="opt-desc">คุ้มที่สุด ค่าผ่อนเบากว่าค่าไฟที่ประหยัดได้</div>
-              </div>
-              <div class="opt-check">✓</div>
-            </button>
-            <button class="opt-card" data-val="1.0">
-              <div class="opt-left">
-                <div class="opt-title">ประหยัดเต็ม 100%</div>
-                <div class="opt-desc">กลางวันผลิตเอง ใกล้เคียงไม่ต้องจ่ายค่าไฟเลย</div>
-              </div>
-              <div class="opt-check">✓</div>
-            </button>
-          </div>
-
-          <div class="step-actions">
-            <button class="btn btn-ghost" onclick="prevStep()">← กลับ</button>
-            <button class="btn btn-brand" onclick="nextStep()">ถัดไป →</button>
-          </div>
-        </div>
-
-        <!-- STEP 3: Payment -->
-        <div class="step" data-step="3">
-          <div class="q-label">ข้อ 3 จาก 3</div>
-          <div class="q-title">จ่ายเต็ม หรือผ่อนดี?</div>
-          <div class="q-sub">ผ่อนได้ 8 ปี ดาวน์แค่ 10% — ไม่กระทบเงินก้อนในกระเป๋า</div>
-
-          <div class="options" id="payOptions">
-            <button class="opt-card selected" data-val="installment">
-              <div class="opt-left">
-                <div class="opt-title">ผ่อน 8 ปี <span class="opt-badge">ยอดนิยม</span></div>
-                <div class="opt-desc">ดาวน์ 10% ผ่อนรายเดือน — ให้ระบบจ่ายเงินคืนให้คุณ</div>
-              </div>
-              <div class="opt-check">✓</div>
-            </button>
-            <button class="opt-card" data-val="full">
-              <div class="opt-left">
-                <div class="opt-title">จ่ายเต็มก้อนเดียว</div>
-                <div class="opt-desc">ประหยัดได้ 100% ของค่าไฟตั้งแต่วันแรก</div>
-              </div>
-              <div class="opt-check">✓</div>
-            </button>
-          </div>
-
-          <div class="step-actions">
-            <button class="btn btn-ghost" onclick="prevStep()">← กลับ</button>
-            <button class="btn btn-brand" onclick="showResult()">ดูผลลัพธ์ →</button>
-          </div>
-        </div>
-
-        <!-- RESULT -->
-        <div class="step" data-step="4">
-          <div class="result-hero">
-            <div class="result-eyebrow">แพ็กเกจที่เหมาะกับคุณ</div>
-            <div class="result-title" id="rTitle">ระบบโซลาร์ขนาด –</div>
-            <div class="result-size" id="rSize">พื้นที่ติดตั้ง – ตร.ม.</div>
-          </div>
-
-          <div class="result-grid">
-            <div class="result-item">
-              <div class="label">ราคารวม</div>
-              <div class="value" id="rPrice">–</div>
+            <div class="opt-check">✓</div>
+          </button>
+          <button type="button" class="opt disabled" data-val="installment" disabled>
+            <div class="opt-body">
+              <div class="opt-title">ผ่อน 8 ปี <span class="opt-badge soon">เร็ว ๆ นี้</span></div>
+              <div class="opt-desc">กำลังพัฒนาพาร์ตเนอร์ธนาคารสำหรับแผนผ่อน</div>
             </div>
-            <div class="result-item">
-              <div class="label" id="rPayLabel">ค่าใช้จ่ายเริ่มต้น</div>
-              <div class="value" id="rDown">–</div>
-            </div>
-            <div class="result-item">
-              <div class="label" id="rMonthlyLabel">ค่าผ่อนต่อเดือน</div>
-              <div class="value" id="rMonthly">–</div>
-            </div>
-            <div class="result-item">
-              <div class="label">ประหยัดค่าไฟต่อเดือน</div>
-              <div class="value" id="rSaving" style="color: var(--ok);">–</div>
-            </div>
-          </div>
-
-          <div class="profit-card" id="profitCard">
-            <div class="label">คุณจะได้กำไรสุทธิเดือนละ</div>
-            <div class="value" id="rProfit">–</div>
-            <div class="sub">ค่าไฟที่ประหยัดได้ – ค่าผ่อน = กำไรเข้ากระเป๋าคุณ</div>
-          </div>
-
-          <div class="result-note">
-            * ตัวเลขประมาณการ อาจต่างไปตามตำแหน่งบ้าน ทิศหลังคา และพฤติกรรมการใช้ไฟ<br>
-            ทีม MheeCharge จะลงสำรวจหน้างานฟรี เพื่อให้ได้ตัวเลขที่แม่นที่สุด
-          </div>
-
-          <div class="step-actions">
-            <button class="btn btn-ghost" onclick="restart()">← คำนวณใหม่</button>
-            <a href="#contact" class="btn btn-brand">ติดต่อทีมงาน →</a>
-          </div>
+            <div class="opt-check">✓</div>
+          </button>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section id="contact" class="contact">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>คุยกับเรา</h2>
-        <p>ปรึกษาฟรี ไม่มีค่าใช้จ่าย ลงสำรวจหน้างานให้ก่อนตัดสินใจ</p>
-      </div>
-      <div class="contact-grid">
-        <div class="contact-item">
-          <div class="icon">💬</div>
-          <h4>LINE Official</h4>
-          <p>@mheecharge</p>
+      <!-- Result -->
+      <div class="result">
+        <div class="result-head">
+          <div class="result-eyebrow">แพ็กเกจที่เหมาะกับคุณ</div>
+          <div class="result-title" id="rTitle">–</div>
+          <div class="result-size" id="rSize">–</div>
         </div>
-        <div class="contact-item">
-          <div class="icon">📞</div>
-          <h4>โทรศัพท์</h4>
-          <p>เร็ว ๆ นี้</p>
+        <div class="result-grid">
+          <div class="r-item"><div class="label">ราคารวม (เริ่มต้น)</div><div class="value" id="rPrice">–</div></div>
+          <div class="r-item"><div class="label">คืนทุนประมาณ</div><div class="value" id="rPayback">–</div></div>
+          <div class="r-item"><div class="label">ประหยัด/เดือน</div><div class="value" id="rSaving" style="color: var(--ok-800);">–</div></div>
+          <div class="r-item"><div class="label">ประหยัด/ปี</div><div class="value" id="rSavingYear" style="color: var(--ok-800);">–</div></div>
         </div>
-        <div class="contact-item">
-          <div class="icon">✉️</div>
-          <h4>อีเมล</h4>
-          <p>hello@mheecharge.com</p>
+        <div class="profit">
+          <div class="label">ค่าไฟที่ประหยัดได้ต่อเดือน</div>
+          <div class="value" id="rProfit">–</div>
+          <div class="sub" id="profitSub">ตลอด 25 ปี ประหยัดรวมได้หลายเท่าของราคาติดตั้ง</div>
         </div>
+        <div class="note">* ตัวเลขประมาณการ อาจต่างไปตามตำแหน่งบ้าน ทิศหลังคา และการใช้ไฟ</div>
       </div>
     </div>
-  </section>
 
-  <footer>
-    <div class="wrap footer-inner">
-      <p>© 2026 MheeCharge — โซลาร์เซลล์ที่ออกแบบมาให้คุ้ม</p>
-      <p>🐻⚡ ประหยัดค่าไฟ คุ้มทุกเดือน</p>
+    <!-- CTA -->
+    <div class="cta-wrap" id="ctaWrap">
+      <button class="cta" id="ctaBtn">
+        <span class="ico">🔍</span>
+        <span>ค้นหาผู้ติดตั้งที่เหมาะกับคุณ</span>
+      </button>
+      <div class="cta-hint">ฟรีใบเสนอราคา • ไม่มีค่าใช้จ่ายในการค้นหา</div>
     </div>
-  </footer>
+
+    <!-- Installers -->
+    <div class="installers" id="installers" style="display:none;">
+      <div class="installers-head">
+        <h2>ผู้ติดตั้ง 5 เจ้าที่เราแนะนำ</h2>
+        <p id="instSubtitle">เปรียบเทียบราคาและบริการได้เลย • ขอใบเสนอราคาฟรี</p>
+      </div>
+      <div id="installerList"></div>
+    </div>
+  </div>
 
   <script>
-    // ---- Constants from real Excel business data ----
-    const RATE = 4.5;            // baht per unit (residential avg)
-    const PEAK_HR = 4;           // peak solar hours per day
-    const ROOF_PER_KW = 6;       // sqm per kWp
-    const PRICE_PER_KW = 43000;  // baht per kWp
-    const DAYS = 30;
-    const DAY_RATIO = 0.5;       // 50% of usage is daytime (baseline)
-    const DOWN_PCT = 0.10;
-    const PMT_FACTOR = 0.01872;  // 8-yr installment factor from Excel
+    // ---- Business constants ----
+    const RATE = 4.5, PEAK_HR = 4, ROOF_PER_KW = 6, PRICE_PER_KW = 43000, DAYS = 30;
 
-    // ---- State ----
-    const state = {
-      bill: 3000,
-      savingsPct: 0.7,
-      pay: 'installment',
-      step: 1
-    };
-
-    // ---- Helpers ----
+    const state = { bill: 500, savingsPct: 0.70 };
     const fmt = n => Math.round(n).toLocaleString('th-TH');
     const $ = id => document.getElementById(id);
 
-    // ---- Slider ----
-    const slider = $('billSlider');
-    const billDisplay = $('billDisplay');
-    function updateSlider() {
-      const val = +slider.value;
+    // ---- Installers (mock data) ----
+    const installers = [
+      {
+        name: 'BrightSun Solar',
+        badge: 'ยอดนิยม', badgeClass: 'popular',
+        rating: 4.9, reviews: 2156, priceMult: 1.00,
+        panel: 'JA Solar (Tier 1)',
+        inverter: 'Huawei',
+        warranty: 'แผง 25 ปี / ติดตั้ง 10 ปี',
+        experience: '8 ปี • ติดตั้งแล้ว 4,200+ หลัง',
+        coverage: 'ทั่วประเทศ • PEA/MEA รับรอง',
+        highlight: 'ฟรีสำรวจหน้างาน • แอปมอนิเตอร์ฟรีตลอดชีพ',
+        featured: true
+      },
+      {
+        name: 'Siam Energy Pro',
+        badge: 'พรีเมียม', badgeClass: 'premium',
+        rating: 4.9, reviews: 1284, priceMult: 1.12,
+        panel: 'Panasonic (Tier 1)',
+        inverter: 'SMA',
+        warranty: 'แผง 25 ปี / ติดตั้ง 10 ปี',
+        experience: '12 ปี • ติดตั้งแล้ว 8,500+ หลัง',
+        coverage: 'กทม. + ปริมณฑล • โชว์รูม 3 สาขา',
+        highlight: 'ช่างประจำบริษัท • รับประกันรั่วซึมหลังคา 10 ปี'
+      },
+      {
+        name: 'EcoPower Thailand',
+        badge: 'ราคาดีที่สุด', badgeClass: 'value',
+        rating: 4.7, reviews: 892, priceMult: 0.88,
+        panel: 'Canadian Solar',
+        inverter: 'Growatt',
+        warranty: 'แผง 25 ปี / ติดตั้ง 3 ปี',
+        experience: '6 ปี • ติดตั้งแล้ว 2,100+ หลัง',
+        coverage: 'ทั่วประเทศ • จัดส่งฟรี',
+        highlight: 'ถูกกว่ามาตรฐาน 12% • ผ่อน 0% กับ 3 ธนาคาร'
+      },
+      {
+        name: 'SolarMax Siam',
+        badge: 'ใกล้บ้านคุณ', badgeClass: 'local',
+        rating: 4.9, reviews: 567, priceMult: 1.05,
+        panel: 'Trina Solar',
+        inverter: 'Huawei',
+        warranty: 'แผง 25 ปี / ติดตั้ง 7 ปี',
+        experience: '5 ปี • ติดตั้งแล้ว 1,800+ หลัง',
+        coverage: 'ภาคกลาง • มีศูนย์บริการในจังหวัด',
+        highlight: 'บริการหลังการขาย 24 ชม. • ทีมเซอร์วิสท้องถิ่น'
+      },
+      {
+        name: 'GreenCharge Co.',
+        badge: 'ติดเร็วใน 14 วัน', badgeClass: 'fast',
+        rating: 4.6, reviews: 1023, priceMult: 0.96,
+        panel: 'Longi Solar',
+        inverter: 'Growatt',
+        warranty: 'แผง 25 ปี / ติดตั้ง 5 ปี',
+        experience: '10 ปี • ติดตั้งแล้ว 5,600+ หลัง',
+        coverage: 'ทั่วประเทศ • ติดตั้งภายใน 2 สัปดาห์',
+        highlight: 'ติดตั้งเร็วที่สุด • ประกันไม่ทันได้เงินชดเชย'
+      }
+    ];
+
+    // ---- Bill slider ----
+    const billSlider = $('billSlider');
+    function updateBill() {
+      const val = +billSlider.value;
       state.bill = val;
-      billDisplay.innerHTML = `${fmt(val)}<span class="unit">บาท/เดือน</span>`;
-      const pct = ((val - slider.min) / (slider.max - slider.min)) * 100;
-      slider.style.background = `linear-gradient(to right, var(--brand) 0%, var(--brand) ${pct}%, var(--line) ${pct}%, var(--line) 100%)`;
+      $('billNum').textContent = fmt(val);
+      const pct = ((val - billSlider.min) / (billSlider.max - billSlider.min)) * 100;
+      billSlider.style.background = `linear-gradient(to right, var(--brand) 0%, var(--brand) ${pct}%, var(--chip) ${pct}%, var(--chip) 100%)`;
+      render();
     }
-    slider.addEventListener('input', updateSlider);
-    updateSlider();
+    billSlider.addEventListener('input', updateBill);
 
-    // ---- Option cards ----
-    function wireOptions(wrapId, key) {
-      const wrap = $(wrapId);
-      wrap.querySelectorAll('.opt-card').forEach(card => {
-        card.addEventListener('click', () => {
-          wrap.querySelectorAll('.opt-card').forEach(c => c.classList.remove('selected'));
-          card.classList.add('selected');
-          const v = card.dataset.val;
-          state[key] = isNaN(+v) ? v : +v;
-        });
-      });
+    // ---- Savings % slider ----
+    const savSlider = $('savSlider');
+    function updateSav() {
+      const val = +savSlider.value;
+      state.savingsPct = val / 100;
+      $('savNum').textContent = val;
+      $('savRec').style.opacity = (val === 70) ? '1' : '0';
+      const pct = ((val - savSlider.min) / (savSlider.max - savSlider.min)) * 100;
+      savSlider.style.background = `linear-gradient(to right, var(--brand) 0%, var(--brand) ${pct}%, var(--chip) ${pct}%, var(--chip) 100%)`;
+      render();
     }
-    wireOptions('savingsOptions', 'savingsPct');
-    wireOptions('payOptions', 'pay');
+    savSlider.addEventListener('input', updateSav);
 
-    // ---- Steps ----
-    function showStep(n) {
-      state.step = n;
-      document.querySelectorAll('.step').forEach(s => s.classList.toggle('active', +s.dataset.step === n));
-      const dots = document.querySelectorAll('.progress-dot');
-      dots.forEach((d, i) => {
-        d.classList.remove('active', 'done');
-        if (i + 1 < Math.min(n, 3)) d.classList.add('done');
-        else if (i + 1 === n && n <= 3) d.classList.add('active');
+    // ---- Payment (only "full" is active) ----
+    document.querySelectorAll('#payOpts .opt:not(.disabled)').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#payOpts .opt').forEach(o => o.classList.remove('selected'));
+        btn.classList.add('selected');
       });
-      // hide progress on result
-      $('progress').style.visibility = n === 4 ? 'hidden' : 'visible';
-      // scroll to top of card
-      document.querySelector('.calc-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-    function nextStep() { showStep(state.step + 1); }
-    function prevStep() { showStep(state.step - 1); }
-    function restart() { showStep(1); }
+    });
 
     // ---- Calculation ----
     function calc() {
-      // Units per month from bill
-      const units = state.bill / RATE;
-      // Daytime usage that solar can offset × savings goal
-      const offsetUnits = units * DAY_RATIO * (state.savingsPct / DAY_RATIO); // = units × savingsPct
-      // kWp needed
-      let kwp = (units * state.savingsPct) / (PEAK_HR * DAYS) * DAYS / DAYS; // simplified
-      // Cleaner formula: daily units × savingsPct / peak hours
-      kwp = ((state.bill / RATE / DAYS) * state.savingsPct) / PEAK_HR;
-      kwp = Math.max(1, Math.round(kwp * 10) / 10); // min 1, round to 0.1
-
+      let kwp = ((state.bill / RATE / DAYS) * state.savingsPct) / PEAK_HR;
+      kwp = Math.max(1, Math.round(kwp * 10) / 10);
       const roof = Math.round(kwp * ROOF_PER_KW);
       const price = Math.round(kwp * PRICE_PER_KW / 1000) * 1000;
-      const down = Math.round(price * DOWN_PCT);
-      const monthly = Math.round(price * PMT_FACTOR);
       const saving = Math.round(state.bill * state.savingsPct);
-      const profit = saving - (state.pay === 'installment' ? monthly : 0);
-
-      return { kwp, roof, price, down, monthly, saving, profit };
+      const yearlySaving = saving * 12;
+      const payback = Math.max(1, Math.ceil(price / yearlySaving));
+      return { kwp, roof, price, saving, yearlySaving, payback };
     }
 
-    function showResult() {
+    function render() {
       const r = calc();
+      $('savBaht').textContent = `ประหยัดประมาณ ${fmt(r.saving)} บ./เดือน`;
       $('rTitle').textContent = `ระบบโซลาร์ขนาด ${r.kwp} kWp`;
       $('rSize').textContent = `ใช้พื้นที่หลังคาประมาณ ${r.roof} ตร.ม.`;
-      $('rPrice').textContent = `${fmt(r.price)} บาท`;
+      $('rPrice').textContent = `${fmt(r.price)} บ.`;
+      $('rPayback').textContent = `${r.payback} ปี`;
+      $('rSaving').textContent = `${fmt(r.saving)} บ.`;
+      $('rSavingYear').textContent = `${fmt(r.yearlySaving)} บ.`;
+      $('rProfit').textContent = `${fmt(r.saving)} บาท`;
+      $('profitSub').textContent = `ตลอด 25 ปี ประหยัดได้ ~${fmt(r.yearlySaving * 25 / 1000)}K บาท (คืนทุนใน ${r.payback} ปี)`;
 
-      if (state.pay === 'installment') {
-        $('rPayLabel').textContent = 'เงินดาวน์ (10%)';
-        $('rDown').textContent = `${fmt(r.down)} บาท`;
-        $('rMonthlyLabel').textContent = 'ค่าผ่อน/เดือน (8 ปี)';
-        $('rMonthly').textContent = `${fmt(r.monthly)} บาท`;
-      } else {
-        $('rPayLabel').textContent = 'จ่ายครั้งเดียว';
-        $('rDown').textContent = `${fmt(r.price)} บาท`;
-        $('rMonthlyLabel').textContent = 'ค่าผ่อน/เดือน';
-        $('rMonthly').textContent = `0 บาท`;
-      }
-
-      $('rSaving').textContent = `${fmt(r.saving)} บาท`;
-
-      const profitCard = $('profitCard');
-      if (state.pay === 'installment') {
-        $('rProfit').textContent = `${fmt(r.profit)} บาท`;
-        profitCard.querySelector('.label').textContent = r.profit >= 0 ? 'คุณจะได้กำไรสุทธิเดือนละ' : 'ส่วนต่างที่คุณจ่ายเพิ่มเดือนละ';
-        profitCard.querySelector('.sub').textContent = r.profit >= 0
-          ? 'ค่าไฟที่ประหยัดได้ – ค่าผ่อน = กำไรเข้ากระเป๋าคุณ'
-          : 'ยังประหยัดกว่าเดิม แค่ช่วงนี้ผ่อนสูงกว่าค่าไฟที่ลด';
-        profitCard.style.background = r.profit >= 0
-          ? 'linear-gradient(135deg, #059669, #10b981)'
-          : 'linear-gradient(135deg, #f59e0b, #ea580c)';
-      } else {
-        $('rProfit').textContent = `${fmt(r.saving)} บาท`;
-        profitCard.querySelector('.label').textContent = 'ค่าไฟที่ประหยัดได้ต่อเดือน';
-        profitCard.querySelector('.sub').textContent = `ประมาณ ${fmt(r.saving * 12)} บาท/ปี — คืนทุนภายใน ${Math.ceil(r.price / (r.saving * 12))} ปี`;
-        profitCard.style.background = 'linear-gradient(135deg, #059669, #10b981)';
-      }
-
-      showStep(4);
+      // Re-render installer prices if visible
+      if ($('installers').style.display !== 'none') renderInstallers();
     }
+
+    // ---- Installer rendering ----
+    function renderInstallers() {
+      const r = calc();
+      $('instSubtitle').textContent = `สำหรับระบบ ${r.kwp} kWp • เปรียบเทียบราคา คุณภาพ และบริการ`;
+      const list = $('installerList');
+      list.innerHTML = '';
+      installers.forEach((it, i) => {
+        const price = Math.round(r.price * it.priceMult / 1000) * 1000;
+        const card = document.createElement('div');
+        card.className = 'installer' + (it.featured ? ' featured' : '');
+        card.innerHTML = `
+          <div class="inst-top">
+            <div>
+              <div class="inst-name-row">
+                <span class="inst-name">${it.name}</span>
+                <span class="inst-badge ${it.badgeClass}">${it.badge}</span>
+              </div>
+              <div class="inst-rating">
+                <span class="stars">★ ${it.rating}</span>
+                <span class="reviews">(${fmt(it.reviews)} รีวิว)</span>
+              </div>
+            </div>
+            <div class="inst-price">
+              <div class="label">ราคาสำหรับคุณ</div>
+              <div class="value">${fmt(price)}</div>
+              <div class="unit">บาท (พร้อมติดตั้ง)</div>
+            </div>
+          </div>
+          <div class="inst-specs">
+            <div><span class="spec-label">แผงโซลาร์</span><span class="spec-value">${it.panel}</span></div>
+            <div><span class="spec-label">อินเวอร์เตอร์</span><span class="spec-value">${it.inverter}</span></div>
+            <div><span class="spec-label">การรับประกัน</span><span class="spec-value">${it.warranty}</span></div>
+            <div><span class="spec-label">ประสบการณ์</span><span class="spec-value">${it.experience}</span></div>
+          </div>
+          <div class="inst-highlight">${it.highlight}</div>
+          <button type="button" class="quote-btn" data-idx="${i}">ขอใบเสนอราคาฟรี →</button>
+        `;
+        list.appendChild(card);
+      });
+
+      // Wire quote buttons
+      list.querySelectorAll('.quote-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (btn.classList.contains('sent')) return;
+          btn.classList.add('sent');
+          btn.textContent = '✓ ส่งคำขอแล้ว — จะติดต่อกลับภายใน 24 ชม.';
+        });
+      });
+    }
+
+    // ---- CTA ----
+    $('ctaBtn').addEventListener('click', () => {
+      $('ctaWrap').style.display = 'none';
+      $('installers').style.display = 'block';
+      renderInstallers();
+      setTimeout(() => {
+        $('installers').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 50);
+    });
+
+    // Initial paint
+    updateBill();
+    updateSav();
   </script>
 </body>
 </html>
